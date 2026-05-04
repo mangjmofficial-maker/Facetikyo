@@ -1,49 +1,81 @@
-# Facetikyo
-Video downloader 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Video Downloader</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Link Redirector</title>
+
     <style>
-        body.dark { background: #0f172a; color: white; }
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #3a3a6a);
+            color: white;
+            text-align: center;
+            padding: 50px;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .box {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #00c3ff;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #00a2d6;
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen flex items-center justify-center p-4 transition-colors duration-300">
-    
-    <div class="max-w-2xl w-full glass rounded-3xl p-8 shadow-2xl text-center">
-        <div class="flex justify-between items-center mb-8">
-            <h1 class="text-3xl font-bold text-white">StreamFetch</h1>
-            <button id="themeToggle" class="p-2 bg-white/20 rounded-full hover:bg-white/40 transition">
-                <i class="fas fa-moon text-white"></i>
-            </button>
-        </div>
+<body>
 
-        <p class="text-white/80 mb-6">Paste your link below to download from YT, TikTok, or IG.</p>
+    <div class="box">
+        <h1>🔗 Link Redirector</h1>
+        <p>Paste a link below:</p>
 
-        <div class="relative mb-6">
-            <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=..." 
-                   class="w-full p-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400">
-            <button onclick="fetchVideoData()" class="mt-4 w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl transition-all transform hover:scale-[1.02] active:scale-95">
-                Fetch Video
-            </button>
-        </div>
+        <input type="text" id="linkInput" placeholder="https://example.com">
+        <br>
+        <button onclick="goToLink()">Go</button>
+    </div>
 
-        <div id="progressContainer" class="hidden mb-6">
-            <div class="w-full bg-white/20 rounded-full h-2.5">
-                <div id="progressBar" class="bg-purple-400 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-            </div>
+    <script>
+        function goToLink() {
+            let link = document.getElementById("linkInput").value.trim();
+
+            if (!link) {
+                alert("Please enter a link!");
+                return;
+            }
+
+            // Auto add https if missing
+            if (!link.startsWith("http://") && !link.startsWith("https://")) {
+                link = "https://" + link;
+            }
+
+            // Redirect
+            window.location.href = link;
+        }
+    </script>
+
+</body>
+</html>            </div>
             <p id="statusMsg" class="text-xs text-white/70 mt-2 italic">Processing...</p>
         </div>
 
